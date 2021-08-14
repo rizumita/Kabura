@@ -29,5 +29,13 @@ class ParameterizedTestingTests: XCTestCase {
         verify(arg2EL) { a, b, expect, line in
             XCTAssertEqual(a + String(b), expect, line: line)
         }
+
+        verify {
+            "" | 0 => "0"
+            "a" | 1 => "a1"
+            "ab" | 2 => "ab2"
+        } test: { a, b, expect in
+            XCTAssertEqual(a + String(b), expect)
+        }
     }
 }
