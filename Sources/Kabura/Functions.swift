@@ -8,6 +8,10 @@ public func params<AE>(@ArgExpectArrayBuilder _ generate: () -> [AE]) -> Params<
     Params(aes: generate())
 }
 
-public func verify<AE>(_ params: Params<AE>, _ f: (AE.AEType) -> ()) where AE: ArgExpect {
-    params.verify(f)
+public func verify<AE>(_ params: Params<AE>, test: (AE.AEType) -> ()) where AE: ArgExpect {
+    params.verify(test)
+}
+
+public func verify<AE>(@ArgExpectArrayBuilder _ generate: () -> [AE], test: (AE.AEType) -> ()) where AE: ArgExpect {
+    Params(aes: generate()).verify(test)
 }
